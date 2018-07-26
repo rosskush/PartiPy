@@ -19,10 +19,10 @@ delr = Lx/ncol
 delc = Ly/nrow
 delv = (ztop - zbot) / nlay
 botm = np.linspace(ztop, zbot, nlay + 1)
-
+nper=3
 # Create the discretization object
 dis = flopy.modflow.ModflowDis(mf, nlay, nrow, ncol, delr=delr, delc=delc,
-                               top=ztop, botm=botm[1:])
+                               top=ztop, botm=botm[1:],nper=nper)
 
 # Variables for the BAS package
 ibound = np.ones((nlay, nrow, ncol), dtype=np.int32)
@@ -30,14 +30,16 @@ ibound[:, :, 0] = -1
 ibound[:, :, -1] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, :, 0] = 10.
-strt[:, :, -1] = 0.
+strt[:, :, -1] = 0
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
 lpf = flopy.modflow.ModflowLpf(mf, hk=10., vka=10., ipakcb=53)
 
 # Add OC package to the MODFLOW model
-spd = {(0, 0): ['print head', 'print budget', 'save head', 'save budget']}
+spd = {}
+for sp in range(nper):
+	spd[(sp, 0)] = ['print head', 'print budget', 'save head', 'save budget']
 oc = flopy.modflow.ModflowOc(mf, stress_period_data=spd, compact=True)
 
 # Add PCG package to the MODFLOW model
