@@ -33,84 +33,103 @@ delv = (ztop - zbot) / nlay
 botm = np.linspace(ztop, zbot, nlay + 1)
 nper=3
 thk = ztop - zbot
-print(delr)
-exit()
 def what_cell_am_i_in(pt,nlay,nrow,ncol,delr,delc):
     delr = delr.cumsum()
     delc = delc.cumsum()
+    x,y = pt
 
+    row = np.searchsorted(delr,y)
+    col = np.searchsorted(delc,x)
     lay = 0
-	return lay, row, col
 
-starting_locs = [(1,0)]
-def track_particle(starting_locs,n=.3,delt=1,ntimes=3):
+    return lay, row, col
+
+def track_particle(starting_locs,n=.3,delt=20,ntimes=30):
+    end_pts = {}
     for i in range(len(starting_locs)):
         x0, y0 = starting_locs[i]
         print(x0,y0)
         xpts, ypts = [x0], [y0]
         for t in range(ntimes):
             xp0, yp0 = xpts[-1], ypts[-1]
+
             l,r,c = what_cell_am_i_in((xp0,yp0),1,nrow,ncol,delc,delr)
-
-
-            vxp1 = (frf[0][0,1]) / (delr * thk * n)
+            vxp1 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp1 = xp0+ vxp1 * delt/2 # x0 + (vx)0 * delt
 
-            vxp2 = (frf[0][0,1]) / (delr * thk * n)
-            xp2 = xp1 + vxp2 * delt/2
-
-            vxp3 = (frf[0][0,1]) / (delr * thk * n)
-            xp3 = xp2 + vxp3 * delt/2
-
-            vxp4 = (frf[0][0,1]) / (delr * thk * n)
-            xp4 = xp3 + vxp4 * delt/2
-
-
-            vyp1 = (fff[0][0,1]) / (delc * thk * n)
+            vyp1 = (fff[l][r,c]) / (delc[r] * thk * n)
             yp1 = yp0+ vyp1 * delt/2 # y0 + (vy)0 * delt
 
-            vyp2 = (fff[0][0,1]) / (delc * thk * n)
+            l,r,c = what_cell_am_i_in((xp1,yp1),1,nrow,ncol,delc,delr)
+            vxp2 = (frf[l][r,c]) / (delr[c] * thk * n)
+            xp2 = xp1 + vxp2 * delt/2
+
+            vyp2 = (fff[l][r,c]) / (delc[r] * thk * n)
             yp2 = yp1 + vyp2 * delt/2
 
-            vyp3 = (fff[0][0,1]) / (delc * thk * n)
+            l,r,c = what_cell_am_i_in((xp2,yp2),1,nrow,ncol,delc,delr)
+            vxp3 = (frf[l][r,c]) / (delr[c] * thk * n)
+            xp3 = xp2 + vxp3 * delt/2
+
+            vyp3 = (fff[l][r,c]) / (delc[r] * thk * n)
             yp3 = yp2 + vyp3 * delt/2
 
-            vyp4 = (fff[0][0,1]) / (delc * thk * n)
-            yp4 = yp3 + vyp4 * delt
 
+            l,r,c = what_cell_am_i_in((xp3,yp3),1,nrow,ncol,delc,delr)
+            vxp4 = (frf[l][r,c]) / (delr[c] * thk * n)
+            xp4 = xp3 + vxp4 * delt
+
+            vyp4 = (fff[l][r,c]) / (delc[r] * thk * n)
+            yp4 = yp3 + vyp4 * delt
+            # print(yp4)
+            # exit()
             xpts.append(xp4)
             ypts.append(yp4)
+        end_pts[i] = [xpts,ypts]
 
         # print(x0, xp1, xp2, xp3, xp4)
         #
         # print(y0, yp1, yp2, yp3, yp4)
 
-        return xpts, ypts
+    return end_pts
 
 # for x
 	# for t in [0,]
+starting_locs = [(150,300),(150,850)]
 
-px, py = track_particle(starting_locs)
-
-
+particles = track_particle(starting_locs)
+px,py = particles[0]
+px1,py1 = particles[1]
 
 print(px,py)
 
 
 
 
-fig, ax = plt.subplots()
-plt.imshow(frf[0])
-plt.colorbar()
-ax.scatter(starting_pt[0],starting_pt[1])
-plt.title('FLOW RIGHT FACE')
+# fig, ax = plt.subplots()
+# plt.imshow(frf[0])
+# plt.colorbar()
+# ax.scatter(starting_pt[0],starting_pt[1])
+# plt.title('FLOW RIGHT FACE')
 
-fig, ax = plt.subplots()
-plt.imshow(fff[0])
-plt.colorbar()
-ax.scatter(starting_pt[0],starting_pt[1])
+# fig, ax = plt.subplots()
+# plt.imshow(fff[0])
+# plt.colorbar()
+# ax.scatter(starting_pt[0],starting_pt[1])
+# plt.title('FLOW FRONT FACE')
+
+mf = flopy.modflow.Modflow.load(os.path.join(model_ws,'tutorial1.nam'))
+fig, ax= plt.subplots()
+modelmap = flopy.plot.ModelMap(model=mf, layer=0)
+qm = modelmap.plot_ibound()
+lc = modelmap.plot_grid()
+hds = bf.HeadFile(os.path.join(model_ws, modelname + '.hds'))
+head = hds.get_data(totim=1.0)
+# levels = np.linspace(0, 10, 11)
+# cs = modelmap.contour_array(head, levels=levels)
 ax.scatter(px, py)
-plt.title('FLOW FRONT FACE')
+ax.scatter(px1,py1)
 
+quiver = modelmap.plot_discharge(frf, fff, head=head)
 
 plt.show()

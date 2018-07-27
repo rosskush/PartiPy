@@ -2,9 +2,12 @@
 import numpy as np
 import flopy
 import os
+import platform
 # Assign name and create modflow model object
 modelname = 'tutorial1'
 exe = os.path.join('gw_codes','mf2005.exe')
+if platform.system() == 'Darwin':
+    exe = 'mf2005' # assuming you have mfnwt in your path
 mf = flopy.modflow.Modflow(modelname, exe_name=exe)
 
 # Model domain and grid definition
@@ -27,14 +30,14 @@ dis = flopy.modflow.ModflowDis(mf, nlay, nrow, ncol, delr=delr, delc=delc,
 # Variables for the BAS package
 ibound = np.ones((nlay, nrow, ncol), dtype=np.int32)
 ibound[:, :, 0] = -1
-ibound[:, :, -1] = -1
+ibound[:, 5, -1] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, :, 0] = 10.
-strt[:, :, -1] = 0
+strt[:, 5, -1] = 0
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
-lpf = flopy.modflow.ModflowLpf(mf, hk=10., vka=10., ipakcb=53)
+lpf = flopy.modflow.ModflowLpf(mf, hk=25., vka=10., ipakcb=53)
 
 # Add OC package to the MODFLOW model
 spd = {}
