@@ -95,11 +95,12 @@ def track_particle(starting_locs,n=.3,delt=20,ntimes=30):
 
 # for x
 	# for t in [0,]
-starting_locs = [(150,300),(150,850)]
+starting_locs = [(150,300),(150,850),(600,500)]
 
 particles = track_particle(starting_locs)
 px,py = particles[0]
 px1,py1 = particles[1]
+px2,py2 = particles[2]
 
 print(px,py)
 
@@ -129,7 +130,7 @@ head = hds.get_data(totim=1.0)
 # cs = modelmap.contour_array(head, levels=levels)
 ax.scatter(px, py)
 ax.scatter(px1,py1)
-
+ax.scatter(px2,py2)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
 
 plt.show()
