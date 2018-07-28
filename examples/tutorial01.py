@@ -25,15 +25,15 @@ botm = np.linspace(ztop, zbot, nlay + 1)
 nper=3
 # Create the discretization object
 dis = flopy.modflow.ModflowDis(mf, nlay, nrow, ncol, delr=delr, delc=delc,
-                               top=ztop, botm=botm[1:],nper=nper)
+                               top=ztop, botm=botm[1:],nper=nper,perlen=10)
 
 # Variables for the BAS package
 ibound = np.ones((nlay, nrow, ncol), dtype=np.int32)
 ibound[:, :, 0] = -1
-ibound[:, 5, -1] = -1
+ibound[:, 8, -1] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, :, 0] = 10.
-strt[:, 5, -1] = 0
+strt[:, 8, -1] = 0
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
@@ -60,7 +60,7 @@ import flopy.utils.binaryfile as bf
 
 plt.subplot(1, 1, 1, aspect='equal')
 hds = bf.HeadFile(modelname + '.hds')
-head = hds.get_data(totim=1.0)
+head = hds.get_data(totim=30)
 levels = np.arange(1, 10, 1)
 extent = (delr / 2., Lx - delr / 2., Ly - delc / 2., delc / 2.)
 plt.contour(head[0, :, :], levels=levels, extent=extent)
