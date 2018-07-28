@@ -1,5 +1,7 @@
 # partipy
 
+![Alt text](partipy/partipy_example.png?raw=true "Title")
+
 semi-analytical methods to track particles in groundwater
 
 # Currently in development by:

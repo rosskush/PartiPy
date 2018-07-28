@@ -40,7 +40,7 @@ def what_cell_am_i_in(pt,nlay,nrow,ncol,delr,delc):
     delc = delc.cumsum()
     x,y = pt
 
-    row = np.searchsorted(delr,y)
+    row = nrow - np.searchsorted(delr,y)-1 # because math
     col = np.searchsorted(delc,x)
     lay = 0
 
@@ -60,8 +60,8 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
             vxp0 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp1 = xp0 + vxp0 * delt/2 # x0 + (vx)0 * delt
 
-            vyp0 = (fff[l][r,c]) / (delc[r] * thk * n)
-            yp1 = yp0 - vyp0 * delt/2 # y0 + (vy)0 * delt
+            vyp0 = -(fff[l][r,c]) / (delc[r] * thk * n)
+            yp1 = yp0 + vyp0 * delt/2 # y0 + (vy)0 * delt
 
 
             l,r,c = what_cell_am_i_in((xp1,yp1),1,nrow,ncol,delc,delr)
@@ -70,8 +70,8 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
             vxp1 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp2 = xp0 + vxp1 * delt/2
 
-            vyp1 = (fff[l][r,c]) / (delc[r] * thk * n)
-            yp2 = yp0 -vyp1 * delt/2
+            vyp1 = -(fff[l][r,c]) / (delc[r] * thk * n)
+            yp2 = yp0 + vyp1 * delt/2
 
 
             l,r,c = what_cell_am_i_in((xp2,yp2),1,nrow,ncol,delc,delr)
@@ -80,8 +80,8 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
             vxp2 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp3 = xp0 + vxp2 * delt
 
-            vyp2 = (fff[l][r,c]) / (delc[r] * thk * n)
-            yp3 = yp0 - vyp2 * delt
+            vyp2 = -(fff[l][r,c]) / (delc[r] * thk * n)
+            yp3 = yp0 + vyp2 * delt
 
             l,r,c = what_cell_am_i_in((xp3,yp3),1,nrow,ncol,delc,delr)
             print(xp3,yp3)
@@ -133,5 +133,8 @@ ax.scatter(px, py)
 ax.scatter(px1,py1)
 ax.scatter(px2,py2)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
+
+
+fig.savefig('partipy_example.png')
 
 plt.show()
