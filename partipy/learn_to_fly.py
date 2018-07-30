@@ -39,6 +39,7 @@ ax.scatter(px1,py1)
 ax.scatter(px2,py2)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.title('Runge-Kutta Method')
-fig.savefig('partipy_example.png')
+
+fig.savefig('partipy_example_rk.png')
 
 plt.show()
