@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/partipy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="-84">
+              <caret line="144" column="64" selection-start-line="144" selection-start-column="64" selection-end-line="144" selection-end-column="64" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+            <state relative-caret-position="272">
+              <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file leaf-file-name="tutorial01.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+            <state relative-caret-position="189">
+              <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -76,10 +76,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>x</find>
       <find>flow r</find>
       <find>flow rig</find>
       <find>flow</find>
+      <find>x</find>
     </findStrings>
     <replaceStrings>
       <replace>y</replace>
@@ -90,8 +90,8 @@
       <list>
         <option value="$PROJECT_DIR$/read_cbb.py" />
         <option value="$PROJECT_DIR$/../examples/tutorial01.py" />
-        <option value="$PROJECT_DIR$/partipy.py" />
         <option value="$PROJECT_DIR$/learn_to_fly.py" />
+        <option value="$PROJECT_DIR$/partipy.py" />
       </list>
     </option>
   </component>
@@ -302,27 +302,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/partipy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="189">
+          <caret line="30" column="52" lean-forward="true" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        <state relative-caret-position="272">
+          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partipy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="144" column="64" selection-start-line="144" selection-start-column="64" selection-end-line="144" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

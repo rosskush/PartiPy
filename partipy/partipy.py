@@ -26,15 +26,22 @@ def get_flow_faces(times,time,cbbobj,lay=0):
     frf = cbbobj.get_data(text='FLOW RIGHT FACE', totim=times[idx])[0]
     return fff, frf # reverse flow up and down for flow front face
 
+def in_domain(r,c,nrow,ncol):
+    val = True
+    if (r < 0) or (r >= nrow):
+        val = False
+    if (c < 0) or (c >= ncol):
+        cal = False
+    return val
+
 def weak_sink(times,time,cbbobj,fff,frf,l,r,c):
     nlay,nrow,ncol = fff.shape
     if (r < 0) or (r >= nrow):
         return True
     if (c < 0) or (c >= ncol):
-        print('batman')
         return True
 
-    Qin = -fff[l][r,c] + frf[l][r,c] # + flf? flow from other layer, still getting there.
+    Qin = abs(fff[l][r,c]) + abs(frf[l][r,c]) # + flf? flow from other layer, still getting there.
     idx = np.searchsorted(times,time)
     if idx >= len(times):
         idx = 0
@@ -42,11 +49,12 @@ def weak_sink(times,time,cbbobj,fff,frf,l,r,c):
     chb[chb == 0] = np.nan
     Qsnk = chb[l][r,c]
     snk = Qsnk/Qin
-
+    print(Qsnk,Qin)
     if snk < 1:
         return True
     else:
         return False
+
 
 
 class track_particles():
@@ -81,6 +89,7 @@ class track_particles():
                 xp0, yp0 = xpts[-1], ypts[-1]
 
                 l,r,c = what_cell_am_i_in((xp0,yp0),1,delc,delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
                 fff,frf = get_flow_faces(self.times,time,self.cbbobj)
 
                 vxp0 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
@@ -90,6 +99,7 @@ class track_particles():
                 yp1 = yp0+ vyp0 * delt/2
 
                 l,r,c = what_cell_am_i_in((xp1,yp1),1,delc,delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
                 vxp1 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
                 xp2 = xp0 + vxp1 * delt/2
 
@@ -97,10 +107,7 @@ class track_particles():
                 yp2 = yp0 + vyp1 * delt/2
 
                 l,r,c = what_cell_am_i_in((xp2,yp2),1,delc,delr)
-                if (r < 0) or (r >= fff.shape[1]):
-                    break
-                if (c < 0) or (c >= fff.shape[2]):
-                    break
+                if not in_domain(r,c,self.nrow,self.ncol): break
                 vxp2 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
                 xp3 = xp0 + vxp2 * delt
 
@@ -109,6 +116,7 @@ class track_particles():
                 yp3 = yp0 + vyp2 * delt
 
                 l,r,c, = what_cell_am_i_in((xp3,yp3),1,delc,delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
                 if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c):
                     break
                 else:
@@ -117,3 +125,57 @@ class track_particles():
             end_pts[i] = [xpts,ypts]
 
         return end_pts
+
+    def Zheng(self):
+        # Runge-Kutta implicit method
+        delr, delc = self.delr, self.delc
+        thk = self.mf.dis.thickness.array
+        n = self.n
+        starting_locs = self.starting_locs
+        delt = self.delt
+        end_pts = {}
+        for i in range(len(starting_locs)):
+            x0, y0 = starting_locs[i]
+            xpts, ypts = [x0], [y0]
+            for t in range(self.ntimes):
+                time = delt * t + self.times[0]
+                xp0, yp0 = xpts[-1], ypts[-1]
+
+                l, r, c = what_cell_am_i_in((xp0, yp0), 1, delc, delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
+                fff, frf = get_flow_faces(self.times, time, self.cbbobj)
+
+                vxp0 = (frf[l][r, c]) / (delr[c] * thk[l][r, c] * n)
+                xp1 = xp0 + vxp0 * delt / 2
+
+                vyp0 = -(fff[l][r, c]) / (delc[r] * thk[l][r, c] * n)
+                yp1 = yp0 + vyp0 * delt / 2
+
+                l, r, c = what_cell_am_i_in((xp1, yp1), 1, delc, delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
+                vxp1 = (frf[l][r, c]) / (delr[c] * thk[l][r, c] * n)
+                xp2 = xp0 + vxp1 * delt / 2
+
+                vyp1 = -(fff[l][r, c]) / (delc[r] * thk[l][r, c] * n)
+                yp2 = yp0 + vyp1 * delt / 2
+
+                l,r,c = what_cell_am_i_in((xp2,yp2),1,delc,delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
+                vxp2 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
+                xp3 = xp0 + vxp2 * delt
+
+                vyp2 = -(fff[l][r,c]) / (delc[r] * thk[l][r,c] * n)
+                yp3 = yp0 + vyp2 * delt
+
+                vxp3 = (frf[l][r,c]) / delr[c] * thk[l][r,c]
+                xnp1 = xpts[-1] + (delt/6)*(vxp0 + 2*vxp1 + 2*vxp2 + vxp3)
+
+                vyp3 = (frf[l][r,c]) / delr[c] * thk[l][r,c]
+                ynp1 = ypts[-1] + (delt/6)*(vyp0 + 2*vyp1 + 2*vyp2 + vyp3)
+
+                xpts.append(xnp1)
+                ypts.append(ynp1)
+            end_pts[i] = [xpts, ypts]
+        return end_pts
+
+

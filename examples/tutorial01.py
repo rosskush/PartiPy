@@ -25,12 +25,12 @@ botm = np.linspace(ztop, zbot, nlay + 1)
 nper=3
 # Create the discretization object
 dis = flopy.modflow.ModflowDis(mf, nlay, nrow, ncol, delr=delr, delc=delc,
-                               top=ztop, botm=botm[1:],nper=nper,perlen=10)
+                               top=ztop, botm=botm[1:],nper=nper,perlen=365)
 
 # Variables for the BAS package
 ibound = np.ones((nlay, nrow, ncol), dtype=np.int32)
 ibound[:, :, 0] = -1
-ibound[:, 8, -1] = -1
+ibound[:, 8, 5] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, :, 0] = 10.
 strt[:, 8, -1] = 0
@@ -60,7 +60,8 @@ import flopy.utils.binaryfile as bf
 
 plt.subplot(1, 1, 1, aspect='equal')
 hds = bf.HeadFile(modelname + '.hds')
-head = hds.get_data(totim=30)
+times = hds.get_times()
+head = hds.get_data(totim=times[-1])
 levels = np.arange(1, 10, 1)
 extent = (delr / 2., Lx - delr / 2., Ly - delc / 2., delc / 2.)
 plt.contour(head[0, :, :], levels=levels, extent=extent)
@@ -70,7 +71,6 @@ fig = plt.figure(figsize=(10,10))
 ax = fig.add_subplot(1, 1, 1, aspect='equal')
 
 hds = bf.HeadFile(modelname+'.hds')
-times = hds.get_times()
 head = hds.get_data(totim=times[-1])
 levels = np.linspace(0, 10, 11)
 

@@ -11,9 +11,10 @@ modelname = 'tutorial1'
 starting_locs = [(199,250),(150,850),(400,510)]
 
 # particles = partipy.track_particles.rk4(starting_locs=starting_locs,n=3,delt=20,ntimes=30)
-tp = partipy.track_particles(modelname+'.cbc',model_ws,modelname,starting_locs,.3,20,30)
+tp = partipy.track_particles(modelname+'.cbc',model_ws,modelname,starting_locs,.3,5,int(3*365/5))
 
-particles = tp.rk4()
+# particles = tp.rk4()
+particles = tp.Zheng()
 
 px, py = particles[0]
 px1,py1 = particles[1]
@@ -31,7 +32,7 @@ modelmap = flopy.plot.ModelMap(model=mf, layer=0)
 qm = modelmap.plot_ibound()
 lc = modelmap.plot_grid()
 hds = bf.HeadFile(os.path.join(model_ws, modelname + '.hds'))
-head = hds.get_data(totim=30)
+head = hds.get_data(totim=times[-1])
 # levels = np.linspace(0, 10, 11)
 # cs = modelmap.contour_array(head, levels=levels)
 ax.scatter(px, py)
