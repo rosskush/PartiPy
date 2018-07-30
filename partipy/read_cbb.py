@@ -18,6 +18,11 @@ frf = cbb.get_data(text='FLOW RIGHT FACE', totim=times[-1])[0] # Flow Right Face
 fff = cbb.get_data(text='FLOW FRONT FACE', totim=times[-1])[0] # Flow Front Face (flow from the row below--higher row number)
 # fff = cbb.get_data(text='FLOW LOWER FACE', totim=times[-1])[0] # Flow Lower Face (flow from layer below--higher layer number)
 
+print(cbb.textlist)
+
+chf = cbb.get_data(text='CONSTANT HEAD')
+print(chf)
+exit()
 
 starting_pt = (1,0)
 
@@ -55,8 +60,7 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
             xp0, yp0 = xpts[-1], ypts[-1]
 
             l,r,c = what_cell_am_i_in((xp0,yp0),1,nrow,ncol,delc,delr)
-            print(xp0,yp0)
-            print(l,r,c)
+
             vxp0 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp1 = xp0 + vxp0 * delt/2 # x0 + (vx)0 * delt
 
@@ -65,8 +69,6 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
 
 
             l,r,c = what_cell_am_i_in((xp1,yp1),1,nrow,ncol,delc,delr)
-            print(xp1,yp1)
-            print(l,r,c)
             vxp1 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp2 = xp0 + vxp1 * delt/2
 
@@ -75,8 +77,6 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
 
 
             l,r,c = what_cell_am_i_in((xp2,yp2),1,nrow,ncol,delc,delr)
-            print(xp2,yp2)
-            print(l,r,c)
             vxp2 = (frf[l][r,c]) / (delr[c] * thk * n)
             xp3 = xp0 + vxp2 * delt
 
@@ -84,8 +84,6 @@ def track_particle(starting_locs,n=.3,delt=30,ntimes=50):
             yp3 = yp0 + vyp2 * delt
 
             l,r,c = what_cell_am_i_in((xp3,yp3),1,nrow,ncol,delc,delr)
-            print(xp3,yp3)
-            print(l,r,c)
             # exit()
 
             xpts.append(xp3)

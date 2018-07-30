@@ -37,12 +37,12 @@ strt[:, 8, -1] = 0
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
-lpf = flopy.modflow.ModflowLpf(mf, hk=25., vka=10., ipakcb=53)
+lpf = flopy.modflow.ModflowLpf(mf, hk=50., vka=10., ipakcb=53)
 
 # Add OC package to the MODFLOW model
 spd = {}
 for sp in range(nper):
-	spd[(sp, 0)] = ['print head', 'print budget', 'save head', 'save budget']
+    spd[(sp, 0)] = ['print head', 'print budget', 'save head', 'save budget']
 oc = flopy.modflow.ModflowOc(mf, stress_period_data=spd, compact=True)
 
 # Add PCG package to the MODFLOW model
