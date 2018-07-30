@@ -1,8 +1,33 @@
 # partipy
-
 ![Alt text](partipy/partipy_example.png?raw=true "Title")
 
-semi-analytical methods to track particles in groundwater
+# Numerical methods to track particles in groundwater
+
+(pronounced party pie) applies numerical methods such as Runge-Kutta and Euler's formula to track particles in modflow models using the cell budget file all within the python console.
+
+partipy has the ability to allow the user place starting coordinate locations in a modflow model and track the particles over time.
+
+## Installation
+
+`partipy` supports Python 3 but feel free to try it in python 2 if you don't want to let the past go
+
+```bash
+    $ git clone https://github.com/rosskush/partipy.git
+    $ cd partpy
+    $ python setup.py install
+```
+
+partipy relies heavly on flopy which can be installed here:
+https://github.com/modflowpy/flopy
+or if you have pip
+
+```bash
+  $ pip install flopy
+```
+
+
+
+
 
 # Currently in development by:
 
