@@ -14,8 +14,8 @@
       <file leaf-file-name="read_cbb.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/read_cbb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+            <state relative-caret-position="415">
+              <caret line="135" column="23" selection-start-line="135" selection-end-line="136" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/partipy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="102">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="398">
+              <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file leaf-file-name="tutorial01.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="340">
+              <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -90,8 +90,8 @@
       <list>
         <option value="$PROJECT_DIR$/read_cbb.py" />
         <option value="$PROJECT_DIR$/../examples/tutorial01.py" />
-        <option value="$PROJECT_DIR$/learn_to_fly.py" />
         <option value="$PROJECT_DIR$/partipy.py" />
+        <option value="$PROJECT_DIR$/learn_to_fly.py" />
       </list>
     </option>
   </component>
@@ -283,16 +283,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_cbb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://H:/Miniconda3/Lib/site-packages/flopy/utils/binaryfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="367">
@@ -300,29 +290,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
+    <entry file="file://$PROJECT_DIR$/read_cbb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="415">
+          <caret line="135" column="23" selection-start-line="135" selection-end-line="136" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="39" column="39" selection-start-line="39" selection-start-column="39" selection-end-line="39" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/partipy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="102">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="40" column="31" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
