@@ -1,5 +1,5 @@
 # partipy
-![Alt text](partipy/partipy_example.png?raw=true "Title")
+![Alt text](partipy/partipy_example_rk.png?raw=true "Title")
 
 # Numerical methods to track particles in groundwater
 
