@@ -13,14 +13,18 @@ starting_locs = [(199,250),(150,850),(400,510)]
 
 
 # particles = partipy.track_particles.rk4(starting_locs=starting_locs,n=3,delt=20,ntimes=30)
-tp = partipy.track_particles(modelname+'.cbc',model_ws,modelname,starting_locs,.3,5,int(3*365/5))
+tp = partipy.track_particles(modelname+'.cbc',model_ws,modelname,starting_locs,.3,1,int(3*365/5))
 
 particles = tp.rk4()
-# particles = tp.Zheng()
+zparticles = tp.Zheng()
 
 px, py = particles[0]
 px1,py1 = particles[1]
 px2,py2 = particles[2]
+
+zpx, zpy = zparticles[0]
+zpx1,zpy1 = zparticles[1]
+zpx2,zpy2 = zparticles[2]
 
 mf = flopy.modflow.Modflow.load(os.path.join(model_ws,'tutorial1.nam'))
 cbb = bf.CellBudgetFile(os.path.join(model_ws,modelname+'.cbc'))
@@ -40,6 +44,8 @@ head = hds.get_data(totim=times[-1])
 ax.scatter(px, py)
 ax.scatter(px1,py1)
 ax.scatter(px2,py2)
+
+ax.scatter(zpx,zpy,color='r',alpha=.5)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.title('Runge-Kutta Method')
 

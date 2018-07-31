@@ -13,7 +13,7 @@ partipy has the ability to allow the user place starting coordinate locations in
 
 ```bash
     $ git clone https://github.com/rosskush/partipy.git
-    $ cd partpy
+    $ cd partipy
     $ python setup.py install
 ```
 
