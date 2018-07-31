@@ -5,7 +5,7 @@
 
 (pronounced party pie) applies numerical methods such as Runge-Kutta and Euler's formula to track particles in modflow models using the cell budget file all within the python console.
 
-partipy has the ability to allow the user place starting coordinate locations in a modflow model and track the particles over time.
+partipy has the ability to allow the user to place starting coordinate locations in a modflow model and track the particles over time.
 
 ## Installation
 
@@ -24,10 +24,6 @@ or if you have pip
 ```bash
   $ pip install flopy
 ```
-
-
-
-
 
 # Currently in development by:
 
