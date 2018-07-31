@@ -9,12 +9,14 @@ model_ws = os.path.join('..','examples')
 modelname = 'tutorial1'
 
 starting_locs = [(199,250),(150,850),(400,510)]
+# starting_locs = [(199,250)]
+
 
 # particles = partipy.track_particles.rk4(starting_locs=starting_locs,n=3,delt=20,ntimes=30)
 tp = partipy.track_particles(modelname+'.cbc',model_ws,modelname,starting_locs,.3,5,int(3*365/5))
 
-# particles = tp.rk4()
-particles = tp.Zheng()
+particles = tp.rk4()
+# particles = tp.Zheng()
 
 px, py = particles[0]
 px1,py1 = particles[1]

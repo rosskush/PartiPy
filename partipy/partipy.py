@@ -49,7 +49,7 @@ def weak_sink(times,time,cbbobj,fff,frf,l,r,c):
     chb[chb == 0] = np.nan
     Qsnk = chb[l][r,c]
     snk = Qsnk/Qin
-    print(Qsnk,Qin)
+    # print(Qsnk,Qin)
     if snk < 1:
         return True
     else:
@@ -167,14 +167,22 @@ class track_particles():
                 vyp2 = -(fff[l][r,c]) / (delc[r] * thk[l][r,c] * n)
                 yp3 = yp0 + vyp2 * delt
 
-                vxp3 = (frf[l][r,c]) / delr[c] * thk[l][r,c]
-                xnp1 = xpts[-1] + (delt/6)*(vxp0 + 2*vxp1 + 2*vxp2 + vxp3)
+                l,r,c = what_cell_am_i_in((xp3,yp3),1,delc,delr)
+                if not in_domain(r,c,self.nrow,self.ncol): break
 
-                vyp3 = (frf[l][r,c]) / delr[c] * thk[l][r,c]
+                vxp3 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
+                xnp1 = xpts[-1] + (delt/6)*(vxp0 + 2*vxp1 + 2*vxp2 + vxp3)
+                # print(f'{xpts[-1]}  + ({delt}/6)*({vxp0} + 2*{vxp1} + 2*{vxp2} + {vxp3})')
+                vyp3 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] *n)
                 ynp1 = ypts[-1] + (delt/6)*(vyp0 + 2*vyp1 + 2*vyp2 + vyp3)
 
-                xpts.append(xnp1)
-                ypts.append(ynp1)
+                l,r,c = what_cell_am_i_in((xnp1,ynp1),1,delc,delr)
+                if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c):
+                    break
+                else:
+                    xpts.append(xp3)
+                    ypts.append(yp3)
+
             end_pts[i] = [xpts, ypts]
         return end_pts
 
