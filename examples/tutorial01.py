@@ -86,5 +86,5 @@ cs = modelmap.contour_array(head, levels=levels)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.savefig('tutorial1b.png')
 
-
+plt.show()
 
