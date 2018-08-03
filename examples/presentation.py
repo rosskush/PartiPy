@@ -37,7 +37,7 @@ ibound[:, 0, :] = -1
 ibound[:, -1, :] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, 0, :] = 10.
-strt[:, -1, :] = 9.5
+strt[:, -1, :] = 9.9
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
@@ -58,7 +58,7 @@ wel = flopy.modflow.ModflowWel(mf,stress_period_data={1:[0,5,5,1000],2:[0,5,5,10
 mf.write_input()
 
 # Run the MODFLOW model
-# success, buff = mf.run_model()
+success, buff = mf.run_model()
 
 # Post process the results
 import matplotlib.pyplot as plt
@@ -180,7 +180,7 @@ centery = [500, 450, 420, 390]
 i = 0
 for r in radi:
 	cx, cy = PointsInCircum(500,centery[i],r,16*2)
-	ax.scatter(cx,cy,label=f'{i+1} days')
+	ax.scatter(cx,cy,label=f'time {i+1}')
 	i+=1
 
 ax.legend(fancybox=True, framealpha=1,loc='upper right')
@@ -211,10 +211,10 @@ cx, cy = PointsInCircum(500,500,100,16*2)
 
 radi = [10, 25,75, 100]
 centery = [500, 485, 460, 450]
-i = 0
+i = 4
 for r in radi:
 	cx, cy = PointsInCircum(500,centery[i],r,16*2)
-	ax.scatter(cx,cy,label=f'{i+1} days')
+	ax.scatter(cx,cy,label=f'time {i+1}')
 	i+=1
 
 ax.legend(fancybox=True, framealpha=1,loc='upper right')
@@ -230,9 +230,9 @@ fig, ax = plt.subplots(figsize=(8,8))
 x = np.arange(1,11)
 y = x*16
 ax.plot(x,y,'k',lw=6,marker='.',label='Total Particles Released')
-ax.plot([9,10],[16*9,96],'r',lw=6,label='Particles Captured',ls='-')
+ax.plot([9,10],[16*9,96],'r',lw=6,label='Particles Remaining',ls='-')
 ax.set_ylabel('Number of Particles')
-ax.set_xlabel('Time')
+ax.set_xlabel('Time (Days)')
 
 ax.set_ylim([0,170])
 ax.set_xlim([1,10])
@@ -242,6 +242,17 @@ ax.legend()
 plt.title('Particles Released vs Particles Captured',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'particle_release_ts.png'))
+
+
+plt.close('all')
+
+
+fig, ax = plt.subplots()
+
+
+
+
+
 
 plt.show()
 
