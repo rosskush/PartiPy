@@ -223,7 +223,7 @@ fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'capture_particles'))
 
 
-plt.close('all')
+# plt.close('all')
 
 
 fig, ax = plt.subplots(figsize=(8,8))
