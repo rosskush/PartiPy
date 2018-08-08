@@ -51,6 +51,8 @@ quiver = modelmap.plot_discharge(frf, fff, head=head)
 
 plt.title('Runge-Kutta Method')
 
+os.remove('partipy_example_rk.png')
 fig.savefig('partipy_example_rk.png')
+
 
 plt.show()

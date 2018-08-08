@@ -54,7 +54,7 @@ def weak_sink(times,time,cbbobj,fff,frf,l,r,c,mf):
     # chb[chb == 0] = np.nan
     # print(chb)
     Qsnk = chb[l][r, c]
-    print(Qsnk)
+    # print(Qsnk)
     # print(l,r,c)
     # print(chb[0][8,5])
     # exit()
