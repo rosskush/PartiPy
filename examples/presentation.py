@@ -141,7 +141,7 @@ fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'extraxtion.png'))
 
 
-plt.close('all')
+# plt.close('all')
 
 starting_locs=[(500,600),(450,500),(450,600)]
 
