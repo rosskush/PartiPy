@@ -39,6 +39,8 @@ bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 # Add LPF package to the MODFLOW model
 lpf = flopy.modflow.ModflowLpf(mf, hk=50., vka=10., ipakcb=53)
 
+wel = flopy.modflow.ModflowWel(mf,stress_period_data={1:[0,4,7,-5000]})
+
 # Add OC package to the MODFLOW model
 spd = {}
 for sp in range(nper):
@@ -83,6 +85,7 @@ modelmap = flopy.plot.ModelMap(model=mf, layer=0)
 qm = modelmap.plot_ibound()
 lc = modelmap.plot_grid()
 cs = modelmap.contour_array(head, levels=levels)
+bc = modelmap.plot_bc('wel',kper=1)
 quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.savefig('tutorial1b.png')
 

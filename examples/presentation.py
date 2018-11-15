@@ -37,7 +37,7 @@ ibound[:, 0, :] = -1
 ibound[:, -1, :] = -1
 strt = np.ones((nlay, nrow, ncol), dtype=np.float32)
 strt[:, 0, :] = 10.
-strt[:, -1, :] = 9.5
+strt[:, -1, :] = 9.9
 bas = flopy.modflow.ModflowBas(mf, ibound=ibound, strt=strt)
 
 # Add LPF package to the MODFLOW model
@@ -58,7 +58,7 @@ wel = flopy.modflow.ModflowWel(mf,stress_period_data={1:[0,5,5,1000],2:[0,5,5,10
 mf.write_input()
 
 # Run the MODFLOW model
-# success, buff = mf.run_model()
+success, buff = mf.run_model()
 
 # Post process the results
 import matplotlib.pyplot as plt
@@ -78,7 +78,7 @@ ax = fig.add_subplot(1, 1, 1, aspect='equal')
 
 hds = bf.HeadFile(os.path.join(model_ws,modelname+'.hds'))
 head = hds.get_data(totim=times[0])
-levels = np.linspace(0, 10, 11)
+levels = np.linspace(head[0].min(),head[0].max(),10)
 
 cbb = bf.CellBudgetFile(os.path.join(model_ws,modelname+'.cbc'))
 kstpkper_list = cbb.get_kstpkper()
@@ -88,8 +88,8 @@ fff = cbb.get_data(text='FLOW FRONT FACE', totim=times[0])[0]
 modelmap = flopy.plot.ModelMap(model=mf, layer=0)
 qm = modelmap.plot_ibound()
 lc = modelmap.plot_grid()
-# cs = modelmap.contour_array(head, levels=levels)
-quiver = modelmap.plot_discharge(frf, fff, head=head)
+cs = modelmap.contour_array(head, levels=levels,linewidths=6,cmap='jet')
+# quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.title('Flow Before Well',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'Steady_state.png'))
@@ -99,8 +99,8 @@ fig = plt.figure(figsize=(10,10))
 ax = fig.add_subplot(1, 1, 1, aspect='equal')
 
 hds = bf.HeadFile(os.path.join(model_ws,modelname+'.hds'))
-head = hds.get_data(totim=times[1])
-levels = np.linspace(0, 10, 11)
+head = hds.get_data(totim=times[-2])
+levels = np.linspace(head[0].min(),head[0].max(),10)
 
 cbb = bf.CellBudgetFile(os.path.join(model_ws,modelname+'.cbc'))
 kstpkper_list = cbb.get_kstpkper()
@@ -112,7 +112,8 @@ qm = modelmap.plot_ibound()
 lc = modelmap.plot_grid()
 wc = modelmap.plot_bc('wel',color='r',kper=2)
 
-quiver = modelmap.plot_discharge(frf, fff, head=head)
+cs = modelmap.contour_array(head, levels=levels,linewidths=6,cmap='jet')
+# quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.title('Flow with Injection Well',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'injection.png'))
@@ -122,8 +123,8 @@ fig = plt.figure(figsize=(10,10))
 ax = fig.add_subplot(1, 1, 1, aspect='equal')
 
 hds = bf.HeadFile(os.path.join(model_ws,modelname+'.hds'))
-head = hds.get_data(totim=times[2])
-levels = np.linspace(0, 10, 11)
+head = hds.get_data(totim=times[-1])
+levels = np.linspace(head[0].min(),head[0].max(),10)
 
 cbb = bf.CellBudgetFile(os.path.join(model_ws,modelname+'.cbc'))
 kstpkper_list = cbb.get_kstpkper()
@@ -134,14 +135,21 @@ modelmap = flopy.plot.ModelMap(model=mf, layer=0)
 qm = modelmap.plot_ibound()
 lc = modelmap.plot_grid()
 wc = modelmap.plot_bc('wel',color='r',kper=2)
-# cs = modelmap.contour_array(head, levels=levels)
-quiver = modelmap.plot_discharge(frf, fff, head=head)
+
+cs = modelmap.contour_array(head, levels=levels,linewidths=6,cmap='jet')
+# quiver = modelmap.plot_discharge(frf, fff, head=head)
 plt.title('Flow with Recovery Well',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'extraxtion.png'))
 
+<<<<<<< HEAD
 
 # plt.close('all')
+=======
+# plt.show()
+# exit()
+plt.close('all')
+>>>>>>> 0d13ee23c46f417f09e0b9d4b88833cc966f8ce0
 
 starting_locs=[(500,600),(450,500),(450,600)]
 
@@ -155,6 +163,39 @@ starting_locs=[(500,600),(450,500),(450,600)]
 # 	ax.plot(ptsx,ptsy)
 
 ######################################
+fig, ax = plt.subplots(figsize=(8,8))
+
+modelmap = flopy.plot.ModelMap(model=mf, layer=0)
+qm = modelmap.plot_ibound()
+lc = modelmap.plot_grid()
+wc = modelmap.plot_bc('wel',color='r',kper=2)
+frf = cbb.get_data(text='FLOW RIGHT FACE', totim=times[0])[0]
+fff = cbb.get_data(text='FLOW FRONT FACE', totim=times[0])[0]
+quiver = modelmap.plot_discharge(frf, fff, head=head,alpha=.5)
+
+
+def PointsInCircum(x,y,r,n):
+	a= [[np.cos(2.*np.pi/n*i)*r,np.sin(2.*np.pi/n*i)*r] for i in range(0,n+1)]
+	x0 = np.array([i[0] for i in a])
+	y0 = np.array([i[1] for i in a])
+	return x0+x, y0+y
+
+
+cx, cy = PointsInCircum(500,500,100,16*2)
+
+radi = [1,1,1,1]
+centery = [500, 450, 400, 350]
+i = 0
+for r in radi:
+	cx, cy = PointsInCircum(500,centery[i],r,16*2)
+	ax.scatter(cx,cy,label=f'time {i+1}',s=100)
+	i+=1
+
+# ax.legend(fancybox=True, framealpha=1,loc='upper right')
+plt.title('Particle Injection',fontsize=25)
+fig.tight_layout()
+fig.savefig(os.path.join(model_ws,'starting_particles'))
+#################################################################
 fig, ax = plt.subplots(figsize=(8,8))
 
 modelmap = flopy.plot.ModelMap(model=mf, layer=0)
@@ -180,10 +221,10 @@ centery = [500, 450, 420, 390]
 i = 0
 for r in radi:
 	cx, cy = PointsInCircum(500,centery[i],r,16*2)
-	ax.scatter(cx,cy,label=f'{i+1} days')
+	ax.scatter(cx,cy,label=f'time {i+1}')
 	i+=1
 
-ax.legend(fancybox=True, framealpha=1,loc='upper right')
+# ax.legend(fancybox=True, framealpha=1,loc='upper right')
 plt.title('Particle Injection',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'insert_particles'))
@@ -211,13 +252,13 @@ cx, cy = PointsInCircum(500,500,100,16*2)
 
 radi = [10, 25,75, 100]
 centery = [500, 485, 460, 450]
-i = 0
+i = 4+4
 for r in radi:
-	cx, cy = PointsInCircum(500,centery[i],r,16*2)
-	ax.scatter(cx,cy,label=f'{i+1} days')
+	cx, cy = PointsInCircum(500,centery[i-8],r,16*2)
+	ax.scatter(cx,cy,label=f'time {i+1}')
 	i+=1
 
-ax.legend(fancybox=True, framealpha=1,loc='upper right')
+# ax.legend(fancybox=True, framealpha=1,loc='upper right')
 plt.title('Particle Capture',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'capture_particles'))
@@ -227,21 +268,31 @@ fig.savefig(os.path.join(model_ws,'capture_particles'))
 
 
 fig, ax = plt.subplots(figsize=(8,8))
-x = np.arange(1,11)
+x = np.arange(1,10)
 y = x*16
 ax.plot(x,y,'k',lw=6,marker='.',label='Total Particles Released')
-ax.plot([9,10],[16*9,96],'r',lw=6,label='Particles Captured',ls='-')
+ax.plot([9,10],[16*9,96],'r',lw=6,label='Particles Remaining',ls='-')
 ax.set_ylabel('Number of Particles')
-ax.set_xlabel('Time')
+ax.set_xlabel('Time (Days)')
 
 ax.set_ylim([0,170])
 ax.set_xlim([1,10])
 ax.grid()
-ax.legend()
+ax.legend(prop={'size': 18},loc='lower right')
 
 plt.title('Particles Released vs Particles Captured',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'particle_release_ts.png'))
+
+
+# plt.close('all')
+
+
+
+
+
+
+
 
 plt.show()
 

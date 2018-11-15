@@ -34,7 +34,7 @@ def in_domain(r,c,nrow,ncol):
         cal = False
     return val
 
-def weak_sink(times,time,cbbobj,fff,frf,l,r,c):
+def weak_sink(times,time,cbbobj,fff,frf,l,r,c,mf):
     nlay,nrow,ncol = fff.shape
     if (r < 0) or (r >= nrow):
         return True
@@ -42,15 +42,32 @@ def weak_sink(times,time,cbbobj,fff,frf,l,r,c):
         return True
 
     Qin = abs(fff[l][r,c]) + abs(frf[l][r,c]) # + flf? flow from other layer, still getting there.
-    idx = np.searchsorted(times,time)
+    idx = np.searchsorted(np.array(times),time,side='right')
     if idx >= len(times):
-        idx = 0
+        idx = len(times)
+    # print(idx)
+    # exit()
+    Qsnk = 0
+    # look for constant head boundries
+
     chb = np.asarray(cbbobj.get_data(text='Constant Head',totim=times[idx], full3D=True))[0]
-    chb[chb == 0] = np.nan
-    Qsnk = chb[l][r,c]
+    # chb[chb == 0] = np.nan
+    # print(chb)
+    Qsnk = chb[l][r, c]
+    # print(Qsnk)
+    # print(l,r,c)
+    # print(chb[0][8,5])
+    # exit()
+
+    packages = mf.get_package_list()
+    # well boundry
+    if 'WEL' in packages:
+        flux = np.array(mf.wel.stress_period_data.array['flux'])
+        flux[np.isnan(flux)] = 0
+        Qsnk += flux[idx][l][r,c]
+
     snk = Qsnk/Qin
-    # print(Qsnk,Qin)
-    if snk < 1:
+    if snk < 1 and Qsnk < 0:
         return True
     else:
         return False
@@ -111,13 +128,13 @@ class track_particles():
                 vxp2 = (frf[l][r,c]) / (delr[c] * thk[l][r,c] * n)
                 xp3 = xp0 + vxp2 * delt
 
-
                 vyp2 = -(fff[l][r,c]) / (delc[r] * thk[l][r,c] * n)
                 yp3 = yp0 + vyp2 * delt
 
                 l,r,c, = what_cell_am_i_in((xp3,yp3),1,delc,delr)
                 if not in_domain(r,c,self.nrow,self.ncol): break
-                if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c):
+                time = 498.
+                if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c,self.mf):
                     break
                 else:
                     xpts.append(xp3)
@@ -177,7 +194,7 @@ class track_particles():
                 ynp1 = ypts[-1] + (delt/6)*(vyp0 + 2*vyp1 + 2*vyp2 + vyp3)
 
                 l,r,c = what_cell_am_i_in((xnp1,ynp1),1,delc,delr)
-                if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c):
+                if weak_sink(self.times,time,self.cbbobj,fff,frf,l,r,c,self.mf):
                     break
                 else:
                     xpts.append(xp3)

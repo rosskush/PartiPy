@@ -14,7 +14,7 @@
       <file leaf-file-name="read_cbb.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/read_cbb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
+            <state relative-caret-position="2295">
               <caret line="135" column="23" selection-start-line="135" selection-end-line="136" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -23,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="partipy.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/partipy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="52" column="15" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
+            <state relative-caret-position="116">
+              <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="learn_to_fly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="697">
+              <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -59,8 +59,8 @@
       <file leaf-file-name="tutorial01.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="42" selection-start-line="42" selection-end-line="44" selection-end-column="77" />
+            <state relative-caret-position="211">
+              <caret line="30" column="35" selection-start-line="30" selection-end-line="30" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -80,6 +80,8 @@
       <find>flow rig</find>
       <find>flow</find>
       <find>x</find>
+      <find>Qsnk</find>
+      <find>weak_sink</find>
     </findStrings>
     <replaceStrings>
       <replace>y</replace>
@@ -90,8 +92,8 @@
       <list>
         <option value="$PROJECT_DIR$/read_cbb.py" />
         <option value="$PROJECT_DIR$/../examples/tutorial01.py" />
-        <option value="$PROJECT_DIR$/partipy.py" />
         <option value="$PROJECT_DIR$/learn_to_fly.py" />
+        <option value="$PROJECT_DIR$/partipy.py" />
       </list>
     </option>
   </component>
@@ -106,6 +108,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,7 +120,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -241,28 +243,72 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32897604" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32897604" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/read_cbb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2210">
+          <caret line="135" column="23" selection-start-line="135" selection-end-line="136" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partipy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://H:/Miniconda3/Lib/site-packages/flopy/utils/binaryfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15657">
+          <caret line="925" column="42" selection-start-line="925" selection-start-column="29" selection-end-line="925" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="42" selection-start-line="42" selection-end-line="44" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/read_cbb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -283,16 +329,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://H:/Miniconda3/Lib/site-packages/flopy/utils/binaryfile.py">
+    <entry file="file://H:/Miniconda3/Lib/site-packages/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="925" column="42" selection-start-line="925" selection-start-column="29" selection-end-line="925" selection-end-column="42" />
+        <state relative-caret-position="197">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/read_cbb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
+        <state relative-caret-position="2295">
           <caret line="135" column="23" selection-start-line="135" selection-end-line="136" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -300,29 +346,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
+    <entry file="file://H:/Miniconda3/Lib/site-packages/flopy/utils/binaryfile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="42" selection-start-line="42" selection-end-line="44" selection-end-column="77" />
+        <state relative-caret-position="367">
+          <caret line="925" column="42" selection-start-line="925" selection-start-column="29" selection-end-line="925" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/partipy.py">
+    <entry file="file://$PROJECT_DIR$/../examples/tutorial01.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="52" column="15" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="211">
+          <caret line="30" column="35" selection-start-line="30" selection-end-line="30" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/learn_to_fly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="697">
+          <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/partipy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
