@@ -142,14 +142,11 @@ plt.title('Flow with Recovery Well',fontsize=25)
 fig.tight_layout()
 fig.savefig(os.path.join(model_ws,'extraxtion.png'))
 
-<<<<<<< HEAD
 
 # plt.close('all')
-=======
 # plt.show()
 # exit()
 plt.close('all')
->>>>>>> 0d13ee23c46f417f09e0b9d4b88833cc966f8ce0
 
 starting_locs=[(500,600),(450,500),(450,600)]
 
@@ -251,6 +248,8 @@ def PointsInCircum(x,y,r,n):
 cx, cy = PointsInCircum(500,500,100,16*2)
 
 radi = [10, 25,75, 100]
+radi = [100, 75, 25, 10]
+
 centery = [500, 485, 460, 450]
 i = 4+4
 for r in radi:
