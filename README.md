@@ -9,7 +9,7 @@ partipy has the ability to allow the user to place starting coordinate locations
 
 ## Installation
 
-`partipy` supports Python 3 but feel free to try it in python 2 if you don't want to let the past go
+`partipy` supports Python 3 
 
 ```bash
     $ git clone https://github.com/rosskush/partipy.git
